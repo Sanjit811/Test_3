@@ -1,0 +1,105 @@
+{% extends 'Utkal_Gym_app/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    label{
+        color: white;
+    }
+</style>
+
+<!-- ======= Hero Section ======= -->
+<section class="d-flex align-items-center justify-content-center" id="hero">
+    <div class="container" data-aos="fade-up">
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+            <div class="col-xl-6 col-lg-8">
+                {% block head %}
+                <h1>Apply Attendance</h1>
+                <div class="myForm">
+                    <hr class="new1">
+                    {# if user #}
+                    <form action="" autocomplete="off" id="signupForm" method="POST">
+                        {% csrf_token %}
+                        <p class="form-group"> <span class="d-flex align-items-start mandatory"></span>
+<!--                            <label class="d-flex align-items-start" for="txt_cntNumber">Phone Number:<span class="mandatory"></span></label>-->
+                            <input class="form-control" id="txt_attndNumber" maxlength="10" name="attndNumber" value="{{user.username}}" pattern="\d*" type="text" readonly required>
+                        </p>
+                        <p class="form-group"> <span class="d-flex align-items-start mandatory"></span>
+                            <select class="form-select" id="ddl_attndWorkout" name="attndWorkout" required>
+                                <option selected>Select Workout</option>
+                                <option value="Biceps">Biceps</option>
+                                <option value="Triceps">Triceps</option>
+                                <option value="Shoulders">Shoulders</option>
+                                <option value="Chest">Chest</option>
+                                <option value="Abs">Abs</option>
+                                <option value="Back">Back</option>
+                                <option value="Warm_Up">Warm_Up</option>
+                                <option value="Treadmill">Treadmill</option>
+                            </select>
+                        </p>
+                        <p class="form-group">
+                            <label class="d-flex align-items-start" for="txt_attndLoginTime">Login Time:<span class="mandatory"></span></label>
+                            <input class="form-control" id="txt_attndLoginTime" name="attndLoginTime" required type="time" placeholder="Enter Your Login Time"/>
+                        </p>
+                        <p class="form-group">
+                            <label class="d-flex align-items-start" for="txt_attndLogoutTime">Logout Time:<span class="mandatory"></span></label>
+                            <input class="form-control" id="txt_attndLogoutTime" name="attndLogoutTime" required type="time" placeholder="Enter Your Logout Time"/>
+                        </p>
+                        <p class="form-group"> <span class="d-flex align-items-start mandatory"></span>
+                            <select class="form-select" id="ddl_attndTrainer" name="attndTrainer" required>
+                                <option selected>Select Trainer</option>
+                                {% if trainer_details %}
+                                    {% for trn in trainer_details %}
+                                        <option value="{{trn}}">{{trn}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </p>
+                        <hr class="new1">
+                        <div class="form-group text-end">
+                            <button class="btn btn-secondary" onclick="window.location.href = '{% url 'home_rout' %}';"
+                                    type="button">Cancel
+                            </button>
+                            <button class="btn btn-warning" type="submit">Apply Attendance</button>
+                            <!--onclick="AddItem_OnClick()"-->
+                        </div>
+                    </form>
+                    {# endif #}
+                </div>
+                {% endblock head %}
+            </div>
+        </div>
+
+    </div>
+</section><!-- End Hero -->
+
+
+{% if messages %}
+    {% for message in messages %}
+        <!-- <script src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script> -->
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/custom.js' %}"></script>
+        {% if message.tags == 'success' %}
+            <script>
+                SwalSuccess("{{message}}");
+            </script>
+
+        {% elif message.tags == 'warning' %}
+            <script>
+                SwalWarning("{{message}}");
+            </script>
+
+        {% elif message.tags == 'info' %}
+            <script>
+                SwalInfo("{{message}}");
+            </script>
+
+        {% else %}
+            <script>
+                SwalError("{{message}}");
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% endblock content %}

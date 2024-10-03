@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Utkal Fitness admin - {% block tittle %} Odisha {% endblock tittle %}</title>
+    <!-- Favicons -->
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'UtkalGym_Admin_app/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'UtkalGym_Admin_app/css/custom.css' %}" rel="stylesheet">
+  <link href="{% static 'UtkalGym_Admin_app/css/bootstrap.min.css' %}" rel="stylesheet">
+ 
+  
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <!-- side bar include here -->
+
+        <!-- end side bar here -->
+        <!-- content wrapper -->
+        <div id="content-wrapper" class="d-flex-column">
+            <div id="content">
+                <!-- inclued top bar here -->
+                {% block content %}
+
+                {% endblock content %}
+
+
+            </div>
+
+
+
+            <!--  include footer  -->
+
+
+
+
+        </div>
+        <!-- end wrapper content -->
+
+    </div>
+
+   
+    
+
+    
+
+
+
+<script src="{% static 'UtkalGym_Admin_app/js/jquery.js' %}"></script>
+<script src="{% static 'UtkalGym_Admin_app/js/popper.min.js' %}"></script>
+<script src="{% static 'UtkalGym_Admin_app/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'UtkalGym_Admin_app/js/custom.js' %}"></script> 
+
+
+    
+</body>
+</html>

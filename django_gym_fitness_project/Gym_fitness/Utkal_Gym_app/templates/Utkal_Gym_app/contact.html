@@ -1,0 +1,163 @@
+{% extends 'Utkal_Gym_app/base.html' %}
+{% block tittle %} Contact {% endblock tittle %}
+{% block content %} 
+{% load static %}
+ <!-- ======= Hero Section ======= -->
+ <style>
+    label{
+        color: white;
+    }
+    .text-warning{
+      color: yellow;
+    }
+ </style>
+  <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+            {% block head %}
+            <div class="myForm">
+                <h4 class="d-flex justify-content-start alert alert-info">
+                    Add Contact Information
+                </h4>
+
+                <hr class="new1">
+
+                <form id="contactForm" action="" method="POST" autocomplete="off">
+                  {% csrf_token %}
+                  <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                    <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                    <input class="form-control" id="txt_cntName" name="cntName" type="text" maxlength="100" placeholder="name">
+                  </p>
+
+                  <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                    <!-- <label class="d-flex align-items-start" for="txt_cntEmail">e_mail:<span class="mandatory"></span></label> -->
+                    <input class="form-control" id="txt_cntEmail" name="cntEmail" type="text"  maxlength="100" placeholder="e_mail">
+                  </p>
+
+                  <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                    <!-- <label class="d-flex align-items-start" for="txt_cntNumber">Phone Number:<span class="mandatory"></span></label> -->
+                    <input class="form-control" id="txt_cntNumber" name="cntNumber" type="text" pattern="\d*" maxlength="10" placeholder="Phone Number">
+                  </p>
+
+                  <small class="text-warning">How can we Help You ?</small>
+
+                  <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                    <!-- <label class="d-flex align-items-start" for="txt_cntDescription">Description:<span class="mandatory"></span></label> -->
+                    <textarea class="form-control" id="txt_cntDescription" name="cntDescription" style="resize: none;" placeholder="Description"></textarea>
+                  </p>            
+                  
+                  <hr class="new1">
+
+                  <div class="form-group text-end">
+                      <button type="button" class="btn btn-secondary" onclick="window.location.href = '{% url 'home_rout' %}';">Cancel</button>
+                      <button type="submit" class="btn btn-primary">submit</button> <!--onclick="AddItem_OnClick()"-->
+                  </div>
+              </form>
+                
+                <!-- <from action="" autocomplete="off" id="signupForm" method="POST" >
+                   
+                    {% csrf_token %}
+
+                    <p class="form-group">
+                        <label class="d-flex align-items-start" for="txt_cntName" > Name: <span class="mandatory"></span></label>
+                        <input class="from-control" id="txt_cntName" maxlength="50" name="cntName" >
+
+                    </p>
+                    <p class="form-group">
+                        <label class="d-flex align-items-start " for="txt_cntEmail" > e_mail: <span class="mandatory"></span></label>
+                        <input class="from-control" id="txt_cntEmail" maxlength="50" name="cntEmail" >
+
+                    </p>
+                    <p class="form-group">
+                        <label class="d-flex align-items-start  " for="txt_cntNumber" > phone Number: <span class="mandatory"></span></label>
+                        <input class="from-control" id="txt_cntNumber" maxlength="50" name="cntNumber" >
+
+                    </p>
+                    <small class="text_warning"> How can we Help You ?</small>
+                    <p class="form-group">
+                        <label class="d-flex align-items-start " for="txt_cntDescription" > Description: <span class="mandatory"></span></label>
+                        <textarea class="from-control" style="resize: none; " id="txt_cntDescription" maxlength="500" name="cntDescription"></textarea>
+    
+                     </p>
+                     <hr class="new1">
+                     <div class="form-group-text-end">
+                        <button class="btn btn-secondary" onclick="window.location.href= '{% url 'home_rout' %}'; " type="button">cancel</button>
+                        <button class="btn btn-warning" type="submit" > submit</button>
+                        
+                     </div>
+
+
+                
+            
+                </from> -->
+
+            </div>
+            {% endblock head %}
+          
+        </div>
+      </div>
+
+      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-store-line"></i>
+            <h3><a href="">Lorem Ipsum</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-bar-chart-box-line"></i>
+            <h3><a href="">Dolor Sitema</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-calendar-todo-line"></i>
+            <h3><a href="">Sedare Perspiciatis</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-paint-brush-line"></i>
+            <h3><a href="">Magni Dolores</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-database-2-line"></i>
+            <h3><a href="">Nemos Enimade</a></h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+  {% if messages %}
+  {% for message in messages %}
+      <script src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script>
+      <script src="{% static 'Utkal_Gym_app/assets/js/custom.js' %}"></script>
+      {% if message.tags == 'success' %}
+          <script>
+              SwalSuccess("{{message}}");
+          </script>
+
+      {% elif message.tags == 'warning' %}
+          <script>
+              SwalWarning("{{message}}");
+          </script>
+
+      {% elif message.tags == 'info' %}
+          <script>
+              SwalInfo("{{message}}");
+          </script>
+
+      {% else %}
+          <script>
+              SwalError("{{message}}");
+          </script>
+      {% endif %}
+  {% endfor %}
+{% endif %}
+  {% endblock content %}

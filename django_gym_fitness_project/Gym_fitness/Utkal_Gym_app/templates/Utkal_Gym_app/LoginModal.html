@@ -1,0 +1,100 @@
+<style>
+    label{
+        color: white;
+    }
+    h1{
+        color: white;
+    }
+    .modal-footer {
+         justify-content: center;
+    }
+
+    /*-------------------------------------
+        # CUSTOM SWEETALERT
+    -------------------------------------*/
+    .swal-modal{
+        background-color: rgba(0, 0, 0, 0.651);
+        color: #fff;
+    }
+    .swal-text{
+        color: #fff;
+        font-size: 15px;
+    }
+    .swal-title{
+        color: #fff;
+        font-size: 20px;
+    }
+
+    /* Icon Settings */
+    .swal-icon--success:before,
+    .swal-icon--success:after,
+    .swal-icon--success__hide-corners {
+        background: none !important;
+    }
+    .swal-icon--success {
+        /* color of the ring */
+        border-color: #ffc107;
+    }
+    .swal-icon--success__Line {
+        /* color of the ring */
+        background-color: #ffc107;
+    }
+    .swal-button {
+        padding: 7px 19px;
+        border-radius: 5px;
+        background-color: #ffc107;
+        font-size: 12px;
+        border: 1px solid #ffc107;
+        color: #111;
+    }
+    .swal-button:focus{
+        box-shadow: none; /*Remove the silver border of the button*/
+    }
+    .swal-button:not([disabled]):hover{
+        background: transparent;
+        color: #fff;
+        border: 1px solid #ffc107;
+    }
+</style>
+
+<!-- Modal -->
+<div aria-hidden="true" data-bs-theme="dark" aria-labelledby="SigninModalLabel" class="modal fade" id="signinModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="SigninModalLabel">Signin</h1>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'signin_rout' %}" method="POST" autocomplete="off" id="login_Form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="txt_signinPhoneNumber" class="col-form-label mandatory">Phone Number:</label>
+                        <input type="text" pattern="\d*" maxlength="10"  class="form-control" id="txt_signinPhoneNumber" name="signinPhoneNumber">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your credentials with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_signinPassword" class="col-form-label mandatory">Password:</label>
+                        <input type="password" class="form-control" id="txt_signinPassword" name="signinPassword">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Signin</button>
+                        </div>
+                    </div>
+<!--                    <p>-->
+<!--                            <h4>don't have an account? click <a class="link-opacity-75-hover" href="#">here</a> for Signup</h4>-->
+<!--                    </p>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-primary">
+                    <small>Don't have an account ?</small>
+                    <small class="text-secondary-emphasis">Click <a class="link-opacity-75" href="{% url 'signup_rout' %}">here</a> for Signup.</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+{% extends 'Utkal_Gym_app/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    label{
+        color: white;
+    }
+</style>
+
+<!-- ======= Hero Section ======= -->
+<section class="d-flex align-items-center justify-content-center" id="hero">
+    <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+            <div class="col-xl-6 col-lg-8">
+                {% block head %}
+                <h1>Enrollment Details</h1>
+                <!--<div class="row d-flex justify-content-center" data-bs-theme="">-->
+                <!--<div class="col-sm-6">-->
+                {% endblock head %}
+            </div>
+        </div>
+
+        <div class="row gy-4 mt-2 text-sm-start" data-aos="zoom-in" data-aos-delay="250">
+            <div class="col-xl-4 col-md-4">
+                <div class="myForm">
+                    {% if profile_details %}
+                        {% for detail in profile_details %}
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-primary"><strong>Name : </strong>{{detail.Enrollment_Full_Name}}</li>
+                                <li class="list-group-item list-group-item-secondary"><strong>e-Mail : </strong>{{detail.Enrollment_Email}}</li>
+                                <li class="list-group-item list-group-item-success"><strong>Gender : </strong>{{detail.Enrollment_Gender}}</li>
+                                <li class="list-group-item list-group-item-danger"><strong>Phone Number : </strong>{{detail.Enrollment_Number}}</li>
+                                <li class="list-group-item list-group-item-warning"><strong>DOB : </strong>{{detail.Enrollment_DOB}}</li>
+                                <li class="list-group-item list-group-item-info"><strong>Membership_Plan : </strong>{{detail.Enrollment_Selecte_membership_plan}}</li>
+                                <li class="list-group-item list-group-item-light"><strong>Trainer : </strong>{{detail.Enrollment_Selected_Trainer}}</li>
+                                <li class="list-group-item list-group-item-dark"><strong>Reference : </strong>{{detail.Enrollment_Reference}}</li>
+                                <li class="list-group-item list-group-item-primary"><strong>Address : </strong>{{detail.Enrollment_Address}}</li>
+                                <li class="list-group-item list-group-item-secondary"><strong>PaymentStatus : </strong>{{detail.Enrollment_Payment_status}}</li>
+                                <li class="list-group-item list-group-item-success"><strong>Amount Paid : </strong>{{detail.Enrollment_price}}</li>
+                                <li class="list-group-item list-group-item-danger"><strong>Upcoming DueDate : </strong>{{detail.Enrollment_DueDate}}</li>
+                                <li class="list-group-item list-group-item-warning"><strong>JoiningDate : </strong>{{detail.Enrollment_JoiningDate}}</li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-xl-8 col-md-4">
+                <h4 class="text-center alert alert-info">
+                    Attendance Data
+                </h4>
+                {% if attendance_details %}
+                <Table class="table table-dark table-striped-columns">
+                    {# csrf_token #}
+                    <thead class="border-bottom font-weight-bold">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Login Time</th>
+                        <th scope="col">Logout Time</th>
+                        <th scope="col">Workout</th>
+                        <th scope="col">Trained By</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for attendance in attendance_details %}
+                    <tr>
+                        <td>{{attendance.Selected_date}}</td>
+                        <td>{{attendance.log_in}}</td>
+                        <td>{{attendance.log_out}}</td>
+                        <td>{{attendance.Selected_workout}}</td>
+                        <td>{{attendance.trained_By}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </Table>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</section><!-- End Hero -->
+
+
+
+
+
+{% if messages %}
+    {% for message in messages %}
+        <!-- <script src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script> -->
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/custom.js' %}"></script>
+        {% if message.tags == 'success' %}
+            <script>
+                SwalSuccess("{{message}}");
+            </script>
+
+        {% elif message.tags == 'warning' %}
+            <script>
+                SwalWarning("{{message}}");
+            </script>
+
+        {% elif message.tags == 'info' %}
+            <script>
+                SwalInfo("{{message}}");
+            </script>
+
+        {% else %}
+            <script>
+                SwalError("{{message}}");
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% endblock content %}

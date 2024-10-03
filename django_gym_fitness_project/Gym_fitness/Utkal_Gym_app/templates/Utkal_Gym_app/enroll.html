@@ -1,0 +1,139 @@
+{% extends 'Utkal_Gym_app/base.html' %}
+{% block content %}
+{% load static %}
+
+
+<section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+
+            <div class="col-xl-6 col-lg-8">
+                {% block head %}
+                <h1>this is enroll page<span>.</span></h1>
+                <div class="myForm">
+
+
+                    <hr class="new1">
+
+                    <form id="enrlForm" action="" method="POST" autocomplete="off">
+                        {% csrf_token %}
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <input class="form-control" id="txt_enrName" name="enrName" type="text" maxlength="100"
+                                placeholder="Enter Your Full Name">
+                        </p>
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <input class="form-control" id="txt_enrEmail" name="enrEmail" type="email"
+                                value="{{user.email}}" maxlength="100"  placeholder="enter your email" readonly >
+
+                        </p>
+
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <select name="ernGender" id="ddl_gender" class="form-select" required>
+                                <option value="male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Transgender">Transgender</option>
+                            </select>
+                        </p>
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <input class="form-control" id="txt_enrNumber" name="enrNumber" type="text"
+                                value="{{user.username}}" pattern="\d" maxlength="100" readonly>
+
+                        </p>
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <input class="form-control" id="txt_enrDoB" name="enrDob" type="date" maxlength="100"
+                                placeholder="Enter your DoB">
+
+                        </p>
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <select class="form-select" name="enr_membership_plane" id="ddl_enrmembership" required>
+                                <option value="" selected> Select Membership Plan ></option>
+                                {% if membership %}
+                                {% for mp in membership %}
+                                <option value="{{mp.Plan_Name}} -₹ {{mp.plan_price}}"> {{mp.Plan_Name}} - ₹{{mp.plan_price}} </option>
+                                {% endfor %}
+                                {% endif %}
+                            </select>
+                        </p>
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <select class="form-select" name="enr_Trainer" id="ddl_enrTrainer" required>
+                                <option value="" selected> Select Trainer ></option>
+                                {% if trainer %}
+
+                                {% for trn in trainer %}
+                                <option value="{{trn}}"> {{trn}} </option>
+                                {% endfor %}
+                                {% endif %}
+                            </select>
+                        </p>
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <input class="form-control" id="txt_ernReference" name="enrReference" type="text"
+                                maxlength="100" placeholder="Reference By">
+
+                        </p>
+                        <!-- <p class="form-group"><span class="d-flex align-items-start mandatory"></span> -->
+                            <!-- <label class="d-flex align-items-start" for="txt_cntName">Name:<span class="mandatory"></span></label> -->
+                            <!-- <input class="form-control" id="txt_enrDoB" name="enrDob" type="date"  maxlength="100" placeholder="Enter your DoB"> -->
+                            <!-- <textarea class="form-group" name="txt_enrAddress" id="enrAddress" maxlength="200"
+                                placeholder="Enter Your Address"></textarea> -->
+                        <!-- </p> -->
+                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+                            <!-- <label class="d-flex align-items-start" for="txt_cntDescription">Description:<span class="mandatory"></span></label> -->
+                            <textarea class="form-control" id="enrAddress" name="txt_enrAddress" style="resize: none;" placeholder="Enter Your Address"></textarea>
+                          </p> 
+
+                        <hr class="news1">
+                        <div class="for-group text-end">  
+                            <button class="btn btn-secondary" onclick="window.location.href='{% url 'home_rout' %}';" type="button" > cancel </button>
+                            <button class="btn btn-warning" type="submit">Enroll</button>
+                        </div>
+                   </form>
+
+
+                    {% endblock head %}
+
+                </div>
+            </div>
+
+
+        </div>
+</section><!-- End Hero -->
+
+
+{% if messages %}
+    {% for message in messages %}
+        <!-- <script src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script> -->
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/custom.js' %}"></script>
+        {% if message.tags == 'success' %}
+            <script>
+                SwalSuccess("{{message}}");
+            </script>
+
+        {% elif message.tags == 'warning' %}
+            <script>
+                SwalWarning("{{message}}");
+            </script>
+
+        {% elif message.tags == 'info' %}
+            <script>
+                SwalInfo("{{message}}");
+            </script>
+
+        {% else %}
+            <script>
+                SwalError("{{message}}");
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% endblock content %}

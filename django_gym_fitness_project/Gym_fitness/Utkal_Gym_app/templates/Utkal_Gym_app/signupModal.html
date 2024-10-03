@@ -1,0 +1,198 @@
+{% extends 'Utkal_Gym_app/base.html' %}
+{% block title %} Signup {% endblock title %}
+{% block content %}
+{% load static %}
+<!--<style>-->
+<!--    /*-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--        # CUSTOM DARK FORM COMPONENTS-->
+<!--    -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+<!--    .myForm{-->
+<!--        padding: 1rem;-->
+<!--        background: #333;-->
+<!--        /*display: flex;*/-->
+<!--        box-shadow: 10px 20px 20px 0 rgba(0, 0, 0, 0.4), -10px 20px 20px 0 rgba(0, 0, 0, 0.4), 0 -2px 20px 0 rgba(0, 0, 0, 0.5);-->
+<!--        border-radius: 10px;-->
+<!--    }-->
+<!--    .myForm h4{-->
+<!--        background-color: #333;-->
+<!--        /*color: #999;*/-->
+<!--        border: none;-->
+<!--        /*text-align: left;*/-->
+<!--    }-->
+<!--    .myForm hr.new1{-->
+<!--        padding: 0;-->
+<!--        width: 100%;-->
+<!--        border: 1px solid #999;-->
+<!--    }-->
+<!--    .myForm input[type=text]{-->
+<!--        background-color: #999;-->
+<!--        color: #000;-->
+<!--        border: 1px solid #999;-->
+<!--    }-->
+<!--    .myForm input[type=email]{-->
+<!--        background-color: #999;-->
+<!--        color: #000;-->
+<!--        border: 1px solid #999;-->
+<!--    }-->
+<!--    .myForm input[type=password]{-->
+<!--        background-color: #999;-->
+<!--        color: #000;-->
+<!--        border: 1px solid #999;-->
+<!--    }-->
+<!--    .myForm label{-->
+<!--        color: #999;-->
+<!--    }-->
+<!--</style>-->
+
+<!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center justify-content-center">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+                <div class="col-xl-6 col-lg-8">
+                    {% block head %}
+                        <h1>Signup Here</h1>
+<!--                        <div class="row d-flex justify-content-center" data-bs-theme="">-->
+<!--                            <div class="col-sm-6">-->
+                                <div class="myForm">
+<!--                                    <h4 class="d-flex justify-content-start alert alert-info">-->
+<!--                                        Add Signup Information-->
+<!--                                    </h4>-->
+                                    <hr class="new1">
+                                    <form id="signupForm" action="" method="POST" autocomplete="off">
+                                        {% csrf_token %}
+                                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+<!--                                            <label class="d-flex align-items-start" for="txt_userNumber">Phone Number:<span class="mandatory"></span></label>-->
+                                            <input class="form-control" id="txt_userNumber" name="userNumber" type="text" pattern="\d*" maxlength="10" placeholder="Phone Number">
+                                        </p>
+                                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+<!--                                            <label class="d-flex align-items-start" for="txt_userEmail">e-Mail:<span class="mandatory"></span></label>-->
+                                            <input class="form-control" id="txt_userEmail" name="userEmail" type="email" maxlength="100" placeholder="E-mail">
+                                        </p>
+                                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+<!--                                            <label class="d-flex align-items-start" for="txt_userPassword">Password:<span class="mandatory"></span></label>-->
+                                            <input class="form-control" id="txt_userPassword" name="userPassword" type="password" maxlength="50" placeholder="Password">
+                                        </p>
+                                        <p class="form-group"><span class="d-flex align-items-start mandatory"></span>
+<!--                                            <label class="d-flex align-items-start" for="txt_confPassword">Confirm Password:<span class="mandatory"></span></label>-->
+                                            <input class="form-control" id="txt_confPassword" name="confPassword" type="text" maxlength="50" placeholder="Confirm Password">
+                                        </p>
+                                        <hr class="new1">
+                                        <div class="form-group text-end">
+                                            <button type="button" class="btn btn-secondary" onclick="window.location.href = '{% url 'home_rout' %}';">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Signup</button> <!--onclick="AddItem_OnClick()"-->
+                                        </div>
+                                    </form>
+                                </div>
+<!--                            </div>-->
+<!--                        </div>-->
+                    {% endblock head %}
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Hero -->
+
+<!--Message from Backend-->
+{% if messages %}
+    {% for message in messages %}
+        <!-- <script src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script> -->
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/sweetalert.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'Utkal_Gym_app/assets/js/custom.js' %}"></script>
+        {% if message.tags == 'success' %}
+            <script>
+                SwalSuccess("{{message}}");
+            </script>
+
+        {% elif message.tags == 'warning' %}
+            <script>
+                SwalWarning("{{message}}");
+            </script>
+
+        {% elif message.tags == 'info' %}
+            <script>
+                SwalInfo("{{message}}");
+            </script>
+
+        {% else %}
+            <script>
+                SwalError("{{message}}");
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<!--<script>-->
+<!--    /*&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--    |   sweetalert   |-->
+<!--    &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+
+<!--function SwalValidation(Errormsg) {-->
+<!--    var msgHtmlmessage = "";-->
+
+<!--    Errormsg.forEach(function (message) {-->
+<!--		msgHtmlmessage += "<div class='alert_css'><i class='fa fa-exclamation-triangle ' aria-hidden='true'></i>" + message + "</div>";-->
+<!--	});-->
+
+<!--    swal({-->
+<!--        title: 'Validation Error',-->
+<!--        text: "",-->
+<!--        html: msgHtmlmessage,-->
+<!--        type: "error",-->
+<!--        showCancelButton: false,-->
+<!--        confirmButtonClass: 'btn-danger',-->
+<!--        confirmButtonText: 'Ok!',-->
+<!--        focusConfirm: true-->
+<!--    });-->
+<!--}-->
+
+<!--function SwalSuccessFocus(msg, elementfocus) {-->
+<!--    debugger;-->
+<!--    swal({-->
+<!--        type: "success",-->
+<!--        title: "Success",-->
+<!--        text: msg,-->
+<!--        timer: 4000,-->
+<!--        onAfterClose: () => {-->
+<!--            setTimeout(() => $('#' + elementfocus).focus(), 110);-->
+<!--        }-->
+<!--    })-->
+<!--}-->
+
+<!--function SwalSuccess(msg) {-->
+<!--    debugger;-->
+<!--    // swal({-->
+<!--    //     type: "success",-->
+<!--    //     title: "Success",-->
+<!--    //     text: msg,-->
+<!--    //     timer: 4000-->
+<!--    // })-->
+<!--    swal({-->
+<!--        title: "Perfect!",-->
+<!--        text: msg,-->
+<!--        icon: "success",-->
+<!--        buttons: true, //"OK",-->
+<!--        //dangerMode: true,-->
+<!--        timer: 4000,-->
+<!--    });-->
+<!--}-->
+
+<!--function SwalWarning(msg) {-->
+<!--    swal({-->
+<!--        type: 'warning',-->
+<!--        title: 'Warning',-->
+<!--        text: msg,-->
+<!--        timer: 5000-->
+<!--    });-->
+<!--}-->
+
+<!--function SwalError(msg) {-->
+<!--    swal({-->
+<!--        type: 'error',-->
+<!--        title: 'Error',-->
+<!--        text: msg-->
+<!--    });-->
+<!--}-->
+<!--</script>-->
+
+{% endblock content %}
